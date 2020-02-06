@@ -1,5 +1,6 @@
-package org.sid.cinema.dao;
+package org.sid.cinema.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -12,22 +13,20 @@ import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Position {
-
+@Data @AllArgsConstructor @NoArgsConstructor  @ToString
+public class Cinema implements Serializable{
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private int seatnumber;
-	private double Longitude;
-	private double latitude;
-	private double atitude;
+	private String name;
+	private double Longitude, latitude, altitude;
+	private int NumberMoviestheater;
+	@OneToMany(mappedBy="cinema")
+	private Collection<Moviestheater> Moviestheaters;
 	@ManyToOne
-	private Moviestheater moviestheater;
-	@ManyToOne
-	private Film film;
-	@OneToMany(mappedBy="position")
-	private Collection<Ticket> tickets;
+	private City city;
+	 
 }

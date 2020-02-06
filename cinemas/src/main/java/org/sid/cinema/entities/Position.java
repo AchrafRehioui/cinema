@@ -1,7 +1,6 @@
-package org.sid.cinema.dao;
+package org.sid.cinema.entities;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,21 +13,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
-public class Film {
+public class Position {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String title;
-	private String director;
-	private String description;
-	private String photo;
-	private Date daterelease;
-	private Date duration;
-	
-	@OneToMany(mappedBy="film")
-	Collection<Position> positions;
+	private int seatnumber;
+	private double Longitude;
+	private double latitude;
+	private double atitude;
 	@ManyToOne
-	private Category category;
+	private Moviestheater moviestheater;
+	@ManyToOne
+	private Film film;
+	@OneToMany(mappedBy="position")
+	private Collection<Ticket> tickets;
 }
