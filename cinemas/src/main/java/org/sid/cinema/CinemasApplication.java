@@ -19,7 +19,15 @@ public class CinemasApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+
+		cinemaService.initCities();
+		cinemaService.initCinemas();
+		cinemaService.initMoviestheater();
+		cinemaService.initPositions();
+		cinemaService.initCategories();
+		cinemaService.initFilms();
+		cinemaService.initProjections();
+		cinemaService.initTickets();
 		
 	}
 

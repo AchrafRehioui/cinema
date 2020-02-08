@@ -51,7 +51,7 @@ public class CinemaServiceImpl  implements ICinemaService{
 
 	@Override
 	public void initCinemas() {
-		
+		 
 		cityRepository.findAll().forEach(v->{
 			Stream.of("UGC", "kinopolis", "Pathé", "4DX")
 			.forEach(nameCinema->{
