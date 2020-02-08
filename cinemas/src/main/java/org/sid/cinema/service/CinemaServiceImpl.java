@@ -42,7 +42,6 @@ public class CinemaServiceImpl  implements ICinemaService{
 	
 	@Override
 	public void initCities() {
-		// TODO Auto-generated method stub
 		Stream.of("Paris","Le havre", "Caen","Rouen").forEach( v->{
 			City city= new City();
 			city.setName(v);
@@ -52,7 +51,7 @@ public class CinemaServiceImpl  implements ICinemaService{
 
 	@Override
 	public void initCinemas() {
-		// TODO Auto-generated method stub
+		
 		cityRepository.findAll().forEach(v->{
 			Stream.of("UGC", "kinopolis", "Pathé", "4DX")
 			.forEach(nameCinema->{
@@ -66,7 +65,6 @@ public class CinemaServiceImpl  implements ICinemaService{
 
 	@Override
 	public void initMoviestheater() {
-		// TODO Auto-generated method stub
 		cinemaRepository.findAll().forEach(cinema->{
 			for(int i=0;i<cinema.getNumberMoviestheater();i++) {
 				Moviestheater moviestheater=new Moviestheater();
@@ -80,7 +78,6 @@ public class CinemaServiceImpl  implements ICinemaService{
 
 	@Override
 	public void initPositions() {
-		// TODO Auto-generated method stub
 		moviestheaterRepository.findAll().forEach(moviestheater->{
 		    for(int i=0; i<moviestheater.getNumberPlace();i++) {
 		    	Position position=new Position();
@@ -94,31 +91,26 @@ public class CinemaServiceImpl  implements ICinemaService{
 
 	@Override
 	public void initSessions() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void initCategories() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void initFilms() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void initProjections() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void initTickets() {
-		// TODO Auto-generated method stub
 		
 	}
 
