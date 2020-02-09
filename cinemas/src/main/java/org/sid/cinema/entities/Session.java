@@ -21,7 +21,7 @@ public class Session {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	private Date beginninghour;
 	
 	@OneToMany(mappedBy="session")
