@@ -23,6 +23,7 @@ public class City {
 	private double latitude;
 	private double altitude;
 	private int population;
+	
 	@OneToMany(mappedBy="city")
 	private Collection<Cinema> Cinemas;
 	

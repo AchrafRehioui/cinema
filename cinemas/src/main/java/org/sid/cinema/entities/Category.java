@@ -20,6 +20,7 @@ public class Category {
 	private Long id;
 	@Column(length=75)
 	private String name;
+	
 	@OneToMany(mappedBy="category")
 	private Collection<Film> films;
 	

@@ -23,8 +23,10 @@ public class Moviestheater {
 	private int numberPlace;
 	@ManyToOne
 	private Cinema cinema;
+	
 	@OneToMany(mappedBy="moviestheater")
 	private Collection<Position> positions;
+	
 	@OneToMany(mappedBy="moviestheater")
 	private Collection<Projection> projections;
 	

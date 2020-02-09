@@ -25,10 +25,14 @@ public class Film {
 	private String description;
 	private String photo;
 	private Date daterelease;
-	private Date duration;
+	private Double duration;
 	
 	@OneToMany(mappedBy="film")
 	Collection<Position> positions;
+	
+	@OneToMany(mappedBy="film")
+	Collection<Projection> projections;
+	
 	@ManyToOne
 	private Category category;
 }

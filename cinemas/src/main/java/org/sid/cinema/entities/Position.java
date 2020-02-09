@@ -21,13 +21,14 @@ public class Position {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private int seatnumber;
-	private double Longitude;
-	private double latitude;
-	private double atitude;
+	
+	
 	@ManyToOne
 	private Moviestheater moviestheater;
+	
 	@ManyToOne
 	private Film film;
+	
 	@OneToMany(mappedBy="position")
 	private Collection<Ticket> tickets;
 }
