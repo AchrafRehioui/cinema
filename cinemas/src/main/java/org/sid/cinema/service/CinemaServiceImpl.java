@@ -148,11 +148,11 @@ public class CinemaServiceImpl  implements ICinemaService{
 		
 		double[] durations= new double[] {1,1.5,2,2.5,3};
 		List<Category> categories= categoryRepository.findAll(); 
-		Stream.of("book of eli", "intesteler","terminator","underwater","Saw","Ad Astra").forEach(t->{
+		Stream.of("book of eli", "intesteller","terminator","underwater","joker","Ad Astra").forEach(t->{
 			Film film= new Film();
 			film.setTitle(t);
 			film.setDuration(durations[new Random().nextInt(durations.length)]);
-			film.setPhoto(t.replaceAll(" ", ""));
+			film.setPhoto(t.replaceAll(" ", "")+".jpg");
 			film.setCategory(categories.get(new Random().nextInt(categories.size())));
 			filmRepository.save(film);
 		});

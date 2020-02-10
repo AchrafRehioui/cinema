@@ -26,8 +26,6 @@ public class Position {
 	@ManyToOne
 	private Moviestheater moviestheater;
 	
-	@ManyToOne
-	private Film film;
 	
 	@OneToMany(mappedBy="position")
 	private Collection<Ticket> tickets;
