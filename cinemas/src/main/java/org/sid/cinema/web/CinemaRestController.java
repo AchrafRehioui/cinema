@@ -4,14 +4,21 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.sid.cinema.dao.FilmRepository;
+import org.sid.cinema.dao.TicketRepository;
 import org.sid.cinema.entities.Film;
+import org.sid.cinema.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import lombok.Data;
 
 @RestController
 public class CinemaRestController {
@@ -19,12 +26,42 @@ public class CinemaRestController {
 	@Autowired
 	private FilmRepository filmRepository;
 	
+	@Autowired
+	private TicketRepository ticketRepository;
+	
 	@GetMapping(path="/imageFilm/{id}", produces=MediaType.IMAGE_JPEG_VALUE)
 	public byte[] image(@PathVariable(name="id")Long id)  throws Exception{
 		Film f=filmRepository.findById(id).get();
 		String photoname= f.getPhoto(); 
-		File file= new File(System.getProperty("user.home")+"/cinema/images/"+ photoname);
+		File file= new File(System.getProperty("user.home")+"/Desktop/cinema/images/"+ photoname);
 		Path path=Paths.get(file.toURI());
 		return Files.readAllBytes(path);
 	}
+	
+	@PostMapping("/payTickets")
+	@Transactional
+	public List<Ticket> payTickets(@RequestBody TicketForm ticketForm){
+		
+		List<Ticket> listTickets = new ArrayList<>();
+		ticketForm.getTickets().forEach(id->{
+			System.out.println(id);
+			Ticket ticket= ticketRepository.findById(id).get();
+			ticket.setNameCustomer(ticketForm.getNameCustomer());
+			ticket.setBooked(true);
+			ticket.setCodePaiement(ticketForm.getCodePayment());
+			ticketRepository.save(ticket);
+			listTickets.add(ticket);
+		});
+		return listTickets;
+	}
+	
+	
+}
+@Data
+class TicketForm {
+
+	private String nameCustomer;
+	private int codePayment;
+	private List<Long>  tickets= new ArrayList<>();
+	
 }

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,13 +23,17 @@ public class Moviestheater {
 	private Long id;
 	private String name;
 	private int numberPlace;
+	
 	@ManyToOne
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Cinema cinema;
 	
 	@OneToMany(mappedBy="moviestheater")
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Collection<Position> positions;
 	
 	@OneToMany(mappedBy="moviestheater")
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Collection<Projection> projections;
 	
 	 

@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,10 +25,14 @@ public class Ticket {
 	
 	@Column(unique=false, nullable=true)
 	private int CodePaiement;
+	
 	private boolean booked;
+	
 	@ManyToOne
 	private Position position;
+	
 	@ManyToOne
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Projection projection;
 	
 	
