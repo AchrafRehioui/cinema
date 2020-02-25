@@ -7,9 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
-
 import javax.transaction.Transactional;
-
 import org.sid.cinema.dao.CategoryRepository;
 import org.sid.cinema.dao.CinemaRepository;
 import org.sid.cinema.dao.CityRepository;
@@ -162,11 +160,15 @@ public class CinemaServiceImpl  implements ICinemaService{
 	@Override
 	public void initProjections() {
 		double[] prices= new double[] {30,50,60,70,90,100};
+		List<Film> films= filmRepository.findAll();
+		
 		cityRepository.findAll().forEach(city->{
 			city.getCinemas().forEach(cinema->{
 				cinema.getMoviestheaters().forEach(moviesTheater->{
-					filmRepository.findAll().forEach(film->{
-						sessionRepository.findAll().forEach(session->{
+					int index = new Random().nextInt(films.size());
+					Film film=films.get(index);
+					
+						    sessionRepository.findAll().forEach(session->{
 							Projection projection=new Projection();
 							projection.setDateProjection(new Date());
 							projection.setFilm(film);
@@ -175,7 +177,6 @@ public class CinemaServiceImpl  implements ICinemaService{
 							projection.setSession(session);
 							projectionRepository.save(projection);
 						});
-					});
 				});
 			});
 		});
